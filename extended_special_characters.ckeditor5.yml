@@ -20,7 +20,7 @@ extended_special_characters_extended_special_characters:
 
   # Configuration that will be used directly by Drupal.
   drupal:
-    label: Simple box demo
+    label: Extended Special Character Set
     # The library loaded while using the editor.
     library: extended_special_characters/extended_special_characters
     # The library loaded when configuring the text format using this plugin.
@@ -28,8 +28,8 @@ extended_special_characters_extended_special_characters:
     toolbar_items:
       # This should match the name of the corresponding plugin exported in the
       # plugin's index.js.
-      simpleBox:
-        label: Simple box demo
+      extendedSpecialCharacters:
+        label: Extended Special Character Set
     # If the plugin does not provide elements, set this as
     # `elements: false`
     elements:

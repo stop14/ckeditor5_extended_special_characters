@@ -11,13 +11,13 @@ export default class SimpleBoxUI extends Plugin {
     const editor = this.editor;
 
     // This will register the simpleBox toolbar button.
-    editor.ui.componentFactory.add('simpleBox', (locale) => {
+    editor.ui.componentFactory.add('extendedSpecialCharacters', (locale) => {
       const command = editor.commands.get('insertSimpleBox');
       const buttonView = new ButtonView(locale);
 
       // Create the toolbar button.
       buttonView.set({
-        label: editor.t('Simple Box'),
+        label: editor.t('Extended Special Character Set'),
         icon,
         tooltip: true,
       });
