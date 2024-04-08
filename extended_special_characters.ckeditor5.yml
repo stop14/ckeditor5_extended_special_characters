@@ -12,7 +12,7 @@ extended_special_characters_extended_special_characters:
   # Configuration that will be sent to CKEditor 5 JavaScript plugins.
   ckeditor5:
     plugins:
-      - extendedSpecialCharactersPlugin.SimpleBox
+      - extendedSpecialCharactersPlugin.ExtendedSpecialCharacters
     # *Additional configuration properties*
     # config: data sent to the constructor of any CKEditor 5 plugin
     #   editorPluginName:

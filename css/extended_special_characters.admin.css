@@ -1,4 +1,4 @@
-.ckeditor5-toolbar-button-extendedSpecialCharacters {
+.ckeditor5-toolbar-button-extendedSpecialCharacters, .ckeditor5-toolbar-button-ExtendedSpecialCharacters {
   background-image: url(../icons/extendedSpecialCharacters.svg);
 }
 

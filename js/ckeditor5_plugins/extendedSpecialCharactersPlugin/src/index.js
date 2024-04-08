@@ -7,8 +7,8 @@
  */
 // cSpell:ignore simplebox
 
-import SimpleBox from './simplebox';
+import ExtendedSpecialCharacters from './simplebox';
 
 export default {
-  SimpleBox,
+  ExtendedSpecialCharacters,
 };
