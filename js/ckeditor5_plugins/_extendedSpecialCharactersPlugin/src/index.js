@@ -5,9 +5,9 @@
  *
  * I.e. this file's purpose is to make plugin(s) discoverable.
  */
-// cSpell:ignore extendedspecialcharacters
+// cSpell:ignore simplebox
 
-import ExtendedSpecialCharacters from './extendedSpecialCharacters.js';
+import ExtendedSpecialCharacters from './extendedSpecialCharacters';
 
 export default {
   ExtendedSpecialCharacters,

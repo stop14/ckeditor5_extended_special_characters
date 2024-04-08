@@ -1,3 +1,8 @@
-.ckeditor5-toolbar-button-extended_special_characters {
+.ckeditor5-toolbar-button-extendedSpecialCharacters {
   background-image: url(../icons/extendedSpecialCharacters.svg);
 }
+
+.ckeditor5-toolbar-button-simpleBox {
+  background-image: url(../icons/simpleBox.svg);
+}
+
