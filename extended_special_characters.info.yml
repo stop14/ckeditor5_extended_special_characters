@@ -1,7 +1,7 @@
 name: 'Extended Special Characters'
 type: module
 description: 'Provides a configurable CKEditor 5 plugin to extend the available set of special characters.'
-package: CKEditor
-core_version_requirement: ^10 || ^11
+package: CKEditor 5
+core_version_requirement: ^9 || ^10 || ^11
 dependencies:
   - drupal:ckeditor5

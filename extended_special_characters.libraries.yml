@@ -1,0 +1,15 @@
+# This adds the plugin JavaScript to the page.
+# cSpell:ignore simplebox demobox
+
+extended_special_characters:
+  js:
+    js/build/extendedSpecialCharactersPlugin.js: { preprocess: false, minified: true }
+  dependencies:
+    - core/ckeditor5
+
+# Loaded in the text format configuration form to provide styling for the icon
+# used in toolbar config.
+admin.extended_special_characters:
+  css:
+    theme:
+      css/extended_special_characters.admin.css: { }
