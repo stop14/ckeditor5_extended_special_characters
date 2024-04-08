@@ -8,17 +8,17 @@
  */
 // cSpell:ignore simpleboxediting simpleboxui
 
-// The contents of SimpleBoxUI and SimpleBox editing could be included in this
+// The contents of ExtendedSpecialCharactersUI and ExtendedSpecialCharacters editing could be included in this
 // file, but it is recommended to separate these concerns in different files.
-import SimpleBoxEditing from './simpleboxediting';
-import SimpleBoxUI from './simpleboxui';
+import ExtendedSpecialCharactersEditing from './extendedSpecialCharactersEditing';
+import ExtendedSpecialCharactersUI from './extendedSpecialCharactersUI';
 import { Plugin } from 'ckeditor5/src/core';
 
 export default class ExtendedSpecialCharacters extends Plugin {
-  // Note that SimpleBoxEditing and SimpleBoxUI also extend `Plugin`, but these
+  // Note that ExtendedSpecialCharactersEditing and ExtendedSpecialCharactersUI also extend `Plugin`, but these
   // are not seen as individual plugins by CKEditor 5. CKEditor 5 will only
   // discover the plugins explicitly exported in index.js.
   static get requires() {
-    return [SimpleBoxEditing, SimpleBoxUI];
+    return [ExtendedSpecialCharactersEditing, ExtendedSpecialCharactersUI];
   }
 }

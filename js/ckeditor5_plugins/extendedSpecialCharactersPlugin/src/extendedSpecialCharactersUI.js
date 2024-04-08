@@ -1,18 +1,18 @@
 /**
- * @file registers the simpleBox toolbar button and binds functionality to it.
+ * @file registers the extendedSpecialCharacters toolbar button and binds functionality to it.
  */
 
 import { Plugin } from 'ckeditor5/src/core';
 import { ButtonView } from 'ckeditor5/src/ui';
-import icon from '../../../../icons/simpleBox.svg';
+import icon from '../../../../icons/extendedSpecialCharacters.svg';
 
-export default class SimpleBoxUI extends Plugin {
+export default class ExtendedSpecialCharactersUI extends Plugin {
   init() {
     const editor = this.editor;
 
-    // This will register the simpleBox toolbar button.
+    // This will register the extendedSpecialCharacters toolbar button.
     editor.ui.componentFactory.add('extendedSpecialCharacters', (locale) => {
-      const command = editor.commands.get('insertSimpleBox');
+      const command = editor.commands.get('insertExtendedSpecialCharacters');
       const buttonView = new ButtonView(locale);
 
       // Create the toolbar button.
@@ -27,7 +27,7 @@ export default class SimpleBoxUI extends Plugin {
 
       // Execute the command when the button is clicked (executed).
       this.listenTo(buttonView, 'execute', () =>
-        editor.execute('insertSimpleBox'),
+        editor.execute('insertExtendedSpecialCharacters'),
       );
 
       return buttonView;

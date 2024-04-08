@@ -1,7 +1,7 @@
 import { Plugin } from 'ckeditor5/src/core';
 import { toWidget, toWidgetEditable } from 'ckeditor5/src/widget';
 import { Widget } from 'ckeditor5/src/widget';
-import InsertSimpleBoxCommand from './insertsimpleboxcommand';
+import InsertSpecialCharacterCommand from './insertSpecialCharacterCommand';
 
 // cSpell:ignore simplebox insertsimpleboxcommand
 
@@ -10,11 +10,11 @@ import InsertSimpleBoxCommand from './insertsimpleboxcommand';
  * plugin-specific data models that are then converted to markup that
  * is inserted in the DOM.
  *
- * CKEditor 5 internally interacts with simpleBox as this model:
- * <simpleBox>
- *    <simpleBoxTitle></simpleBoxTitle>
- *    <simpleBoxDescription></simpleBoxDescription>
- * </simpleBox>
+ * CKEditor 5 internally interacts with extendedSpecialCharacters as this model:
+ * <extendedSpecialCharacters>
+ *    <extendedSpecialCharactersTitle></extendedSpecialCharactersTitle>
+ *    <extendedSpecialCharactersDescription></extendedSpecialCharactersDescription>
+ * </extendedSpecialCharacters>
  *
  * Which is converted for the browser/user as this markup
  * <section class="simple-box">
@@ -22,10 +22,10 @@ import InsertSimpleBoxCommand from './insertsimpleboxcommand';
  *   <div class="simple-box-description"></div>
  * </section>
  *
- * This file has the logic for defining the simpleBox model, and for how it is
+ * This file has the logic for defining the extendedSpecialCharacters model, and for how it is
  * converted to standard DOM markup.
  */
-export default class SimpleBoxEditing extends Plugin {
+export default class ExtendedSpecialCharactersEditing extends Plugin {
   static get requires() {
     return [Widget];
   }
@@ -34,17 +34,17 @@ export default class SimpleBoxEditing extends Plugin {
     this._defineSchema();
     this._defineConverters();
     this.editor.commands.add(
-      'insertSimpleBox',
-      new InsertSimpleBoxCommand(this.editor),
+      'insertExtendedSpecialCharacters',
+      new InsertSpecialCharacterCommand(this.editor),
     );
   }
 
   /*
    * This registers the structure that will be seen by CKEditor 5 as
-   * <simpleBox>
-   *    <simpleBoxTitle></simpleBoxTitle>
-   *    <simpleBoxDescription></simpleBoxDescription>
-   * </simpleBox>
+   * <extendedSpecialCharacters>
+   *    <extendedSpecialCharactersTitle></extendedSpecialCharactersTitle>
+   *    <extendedSpecialCharactersDescription></extendedSpecialCharactersDescription>
+   * </extendedSpecialCharacters>
    *
    * The logic in _defineConverters() will determine how this is converted to
    * markup.
@@ -53,36 +53,36 @@ export default class SimpleBoxEditing extends Plugin {
     // Schemas are registered via the central `editor` object.
     const schema = this.editor.model.schema;
 
-    schema.register('simpleBox', {
+    schema.register('extendedSpecialCharacters', {
       // Behaves like a self-contained object (e.g. an image).
       isObject: true,
       // Allow in places where other blocks are allowed (e.g. directly in the root).
       allowWhere: '$block',
     });
 
-    schema.register('simpleBoxTitle', {
+    schema.register('extendedSpecialCharactersTitle', {
       // This creates a boundary for external actions such as clicking and
       // and keypress. For example, when the cursor is inside this box, the
       // keyboard shortcut for "select all" will be limited to the contents of
       // the box.
       isLimit: true,
-      // This is only to be used within simpleBox.
-      allowIn: 'simpleBox',
+      // This is only to be used within extendedSpecialCharacters.
+      allowIn: 'extendedSpecialCharacters',
       // Allow content that is allowed in blocks (e.g. text with attributes).
       allowContentOf: '$block',
     });
 
-    schema.register('simpleBoxDescription', {
+    schema.register('extendedSpecialCharactersDescription', {
       isLimit: true,
-      allowIn: 'simpleBox',
+      allowIn: 'extendedSpecialCharacters',
       allowContentOf: '$root',
     });
 
     schema.addChildCheck((context, childDefinition) => {
-      // Disallow simpleBox inside simpleBoxDescription.
+      // Disallow extendedSpecialCharacters inside extendedSpecialCharactersDescription.
       if (
-        context.endsWith('simpleBoxDescription') &&
-        childDefinition.name === 'simpleBox'
+        context.endsWith('extendedSpecialCharactersDescription') &&
+        childDefinition.name === 'extendedSpecialCharacters'
       ) {
         return false;
       }
@@ -102,9 +102,9 @@ export default class SimpleBoxEditing extends Plugin {
     //
     // If <section class="simplebox"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <simpleBox> model.
+    // <extendedSpecialCharacters> model.
     conversion.for('upcast').elementToElement({
-      model: 'simpleBox',
+      model: 'extendedSpecialCharacters',
       view: {
         name: 'section',
         classes: 'simple-box',
@@ -113,10 +113,10 @@ export default class SimpleBoxEditing extends Plugin {
 
     // If <h2 class="simple-box-title"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <simpleBoxTitle> model, provided it is a child element of <simpleBox>,
+    // <extendedSpecialCharactersTitle> model, provided it is a child element of <extendedSpecialCharacters>,
     // as required by the schema.
     conversion.for('upcast').elementToElement({
-      model: 'simpleBoxTitle',
+      model: 'extendedSpecialCharactersTitle',
       view: {
         name: 'h2',
         classes: 'simple-box-title',
@@ -125,10 +125,10 @@ export default class SimpleBoxEditing extends Plugin {
 
     // If <h2 class="simple-box-description"> is present in the existing markup
     // processed by CKEditor, then CKEditor recognizes and loads it as a
-    // <simpleBoxDescription> model, provided it is a child element of
-    // <simpleBox>, as required by the schema.
+    // <extendedSpecialCharactersDescription> model, provided it is a child element of
+    // <extendedSpecialCharacters>, as required by the schema.
     conversion.for('upcast').elementToElement({
-      model: 'simpleBoxDescription',
+      model: 'extendedSpecialCharactersDescription',
       view: {
         name: 'div',
         classes: 'simple-box-description',
@@ -138,30 +138,30 @@ export default class SimpleBoxEditing extends Plugin {
     // Data Downcast Converters: converts stored model data into HTML.
     // These trigger when content is saved.
     //
-    // Instances of <simpleBox> are saved as
+    // Instances of <extendedSpecialCharacters> are saved as
     // <section class="simple-box">{{inner content}}</section>.
     conversion.for('dataDowncast').elementToElement({
-      model: 'simpleBox',
+      model: 'extendedSpecialCharacters',
       view: {
         name: 'section',
         classes: 'simple-box',
       },
     });
 
-    // Instances of <simpleBoxTitle> are saved as
+    // Instances of <extendedSpecialCharactersTitle> are saved as
     // <h2 class="simple-box-title">{{inner content}}</h2>.
     conversion.for('dataDowncast').elementToElement({
-      model: 'simpleBoxTitle',
+      model: 'extendedSpecialCharactersTitle',
       view: {
         name: 'h2',
         classes: 'simple-box-title',
       },
     });
 
-    // Instances of <simpleBoxDescription> are saved as
+    // Instances of <extendedSpecialCharactersDescription> are saved as
     // <div class="simple-box-description">{{inner content}}</div>.
     conversion.for('dataDowncast').elementToElement({
-      model: 'simpleBoxDescription',
+      model: 'extendedSpecialCharactersDescription',
       view: {
         name: 'div',
         classes: 'simple-box-description',
@@ -173,9 +173,9 @@ export default class SimpleBoxEditing extends Plugin {
     // after the Data Upcast Converters, and are re-triggered any time there
     // are changes to any of the models' properties.
     //
-    // Convert the <simpleBox> model into a container widget in the editor UI.
+    // Convert the <extendedSpecialCharacters> model into a container widget in the editor UI.
     conversion.for('editingDowncast').elementToElement({
-      model: 'simpleBox',
+      model: 'extendedSpecialCharacters',
       view: (modelElement, { writer: viewWriter }) => {
         const section = viewWriter.createContainerElement('section', {
           class: 'simple-box',
@@ -185,9 +185,9 @@ export default class SimpleBoxEditing extends Plugin {
       },
     });
 
-    // Convert the <simpleBoxTitle> model into an editable <h2> widget.
+    // Convert the <extendedSpecialCharactersTitle> model into an editable <h2> widget.
     conversion.for('editingDowncast').elementToElement({
-      model: 'simpleBoxTitle',
+      model: 'extendedSpecialCharactersTitle',
       view: (modelElement, { writer: viewWriter }) => {
         const h2 = viewWriter.createEditableElement('h2', {
           class: 'simple-box-title',
@@ -196,9 +196,9 @@ export default class SimpleBoxEditing extends Plugin {
       },
     });
 
-    // Convert the <simpleBoxDescription> model into an editable <div> widget.
+    // Convert the <extendedSpecialCharactersDescription> model into an editable <div> widget.
     conversion.for('editingDowncast').elementToElement({
-      model: 'simpleBoxDescription',
+      model: 'extendedSpecialCharactersDescription',
       view: (modelElement, { writer: viewWriter }) => {
         const div = viewWriter.createEditableElement('div', {
           class: 'simple-box-description',
