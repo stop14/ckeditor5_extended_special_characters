@@ -4,11 +4,8 @@
 
 import { Plugin } from 'ckeditor5/src/core';
 import {
-  addToolbarToDropdown,
   addListToDropdown,
-  ButtonView,
   createDropdown,
-  DropdownButtonView,
   Model,
   SplitButtonView,
 } from 'ckeditor5/src/ui';
@@ -18,10 +15,12 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
   init() {
     const editor = this.editor;
 
-    // This will register the extendedSpecialCharacters toolbar button.
+    // Register the extendedSpecialCharacters toolbar button.
     editor.ui.componentFactory.add('extendedSpecialCharacters', (locale) => {
       const dropdownView = createDropdown(locale, SplitButtonView);
       const options = ['🚀','👽','🌟','😀','🤯','🤘'];
+      const inputCommand = editor.commands.get( 'insertText');
+
       dropdownView.buttonView.actionView.set({
         label: 'Extended Special characters',
         icon: icon,
@@ -40,8 +39,8 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
           })
         }
 
-        //def.model.bind('isOn').to(inputCommand,option);
-        //  def.model.set( 'commandName', 'paragraph' ); // ??
+        def.model.bind('isOn').to(inputCommand,option);
+        def.model.set( 'commandValue', option );
 
         items.add( def );
       })
@@ -57,6 +56,17 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
             'ck-extended-special-characters'
           ]
         }
+      } );
+
+      dropdownView.bind( 'isEnabled' ).to( inputCommand );
+
+      this.listenTo( dropdownView, 'execute', evt => {
+        const { commandValue } = evt.source;
+        this.editor.model.change((writer) => {
+          const insertPosition = this.editor.model.document.selection.getFirstPosition();
+          writer.insertText(commandValue, insertPosition);
+        });
+        editor.editing.view.focus();
       } );
 
       return dropdownView;
