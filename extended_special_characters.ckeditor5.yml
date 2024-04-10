@@ -32,16 +32,7 @@ extended_special_characters_extended_special_characters:
         label: Extended Special Character Set
     # If the plugin does not provide elements, set this as
     # `elements: false`
-    elements:
-      # Note that it necessary for elements to separately provide both the tag
-      # (f.e. `<h2>`) and the attribute being added to the tag
-      # (f.e. `<h2 class="simple-box-title">`).
-      - <h2>
-      - <h2 class="simple-box-title">
-      - <div>
-      - <div class="simple-box-description">
-      - <section>
-      - <section class="simple-box">
+    elements: false
     # *Additional configuration properties*
     # conditions: for setting additional criteria that must be met for the
     #   plugin to be active.

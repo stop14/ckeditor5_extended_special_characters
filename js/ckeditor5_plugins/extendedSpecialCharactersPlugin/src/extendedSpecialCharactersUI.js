@@ -14,7 +14,6 @@ import {
 } from 'ckeditor5/src/ui';
 import { Collection } from 'ckeditor5/src/utils';
 import icon from '../../../../icons/extendedSpecialCharacters.svg';
-
 export default class ExtendedSpecialCharactersUI extends Plugin {
   init() {
     const editor = this.editor;
@@ -24,10 +23,11 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
       const dropdownView = createDropdown(locale, SplitButtonView);
       const options = ['🚀','👽','🌟','😀','🤯','🤘'];
       dropdownView.buttonView.actionView.set({
+        label: 'Extended Special characters',
         icon: icon,
-        tooltip: true
+        tooltip: true,
       });
-      //
+
       const items = new Collection();
 
       options.forEach((option) => {
@@ -44,27 +44,20 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
         //  def.model.set( 'commandName', 'paragraph' ); // ??
 
         items.add( def );
-
       })
 
-      /*
-      items.add({
-        type: "button",
-        model: new Model({
-          withText: true,
-          label: "Foo"
-        })
-      });
+      addListToDropdown(dropdownView, items, {
+        ariaLabel: "Insert Extended Special Characters",
+        role: 'menu'
+      }) ;
 
-      items.add({
-        type: "button",
-        model: new Model({
-          withText: true,
-          label: "Bar"
-        })
-      });
-       */
-      addListToDropdown(dropdownView, items);
+      dropdownView.extendTemplate( {
+        attributes: {
+          class: [
+            'ck-extended-special-characters'
+          ]
+        }
+      } );
 
       return dropdownView;
     });

@@ -4,6 +4,9 @@
 extended_special_characters:
   js:
     js/build/extendedSpecialCharactersPlugin.js: { preprocess: false, minified: true }
+  css:
+    theme:
+      css/charactergrid.css: { }
   dependencies:
     - core/ckeditor5
 
