@@ -1,0 +1,1 @@
+ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters:&#10  type: mapping&#10  label: 'Extended Special Character Options'&#10  mapping:&#10    line_height_options:&#10      type: sequence&#10      orderby: value&#10      label: 'Extended Special Character'&#10      sequence:&#10        type: string&#10        label: 'Extended Special Character'&#10

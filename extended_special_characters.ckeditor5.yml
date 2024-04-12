@@ -33,8 +33,8 @@ extended_special_characters_extended_special_characters:
     # If the plugin does not provide elements, set this as
     # `elements: false`
     elements: false
+    class: \Drupal\extended_special_characters\Plugin\CKEditor5Plugin\CKEditor5ExtendedSpecialCharacters
     # *Additional configuration properties*
     # conditions: for setting additional criteria that must be met for the
     #   plugin to be active.
-    # class: Optional PHP class that makes it possible for the plugin to provide
-    #   dynamic values, or a configuration UI.
+    # class: \Drupal\extended_special_characters\Plugin\CKEditor5Plugin\CKEditor5ExtendedSpecialCharacters
