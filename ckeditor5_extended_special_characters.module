@@ -6,7 +6,7 @@
  *
  */
 
-function extended_special_characters_add_extended_special_character_options(&$data) {
+function ckeditor5_extended_special_characters_add_extended_special_character_options(&$data) {
   $default_options = ['🚀', '👽', '🌟', '😀', '🤯', '🤘','🔥'];
   $data['options'] = array_merge($data['options'],$default_options);
 }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Drupal\extended_special_characters\Plugin\CKEditor5Plugin;
+namespace Drupal\ckeditor5_extended_special_characters\Plugin\CKEditor5Plugin;
 
 use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;
 use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;
@@ -73,7 +73,7 @@ class CKEditor5ExtendedSpecialCharacters extends CKEditor5PluginDefault implemen
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
     // Matches the config schema structure at
-    // ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters
+    // ckeditor5.plugin.ckeditor5_ckeditor5_extended_special_characters_extended_special_characters
     $options_string = $form_state->getValue(static::CONFIG_NAME);
 
     if ($options_string !== "") {

@@ -1,4 +1,4 @@
-ckeditor5.plugin.extended_special_characters_extended_special_characters:
+ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters:
   type: mapping
   label: 'Available Special Characters'
   mapping:
