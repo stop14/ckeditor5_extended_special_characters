@@ -15,12 +15,14 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
   init() {
     const editor = this.editor;
 
+
     editor.config.define('extendedSpecialCharacters', {options: ['🚀','👽','🌟','😀','🤯','🤘']});
 
     // Register the extendedSpecialCharacters toolbar button.
     editor.ui.componentFactory.add('extendedSpecialCharacters', (locale) => {
       const dropdownView = createDropdown(locale, SplitButtonView);
-      const options = editor.config.get(extendedSpecialCharacters.options);
+      //const options = ['🚀','👽','🌟','😀','🤯','🤘'];
+      const options = editor.config.get('extendedSpecialCharacters').options;
       const inputCommand = editor.commands.get( 'insertText');
 
       dropdownView.buttonView.actionView.set({
@@ -32,7 +34,6 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
       const items = new Collection();
 
       options.forEach((option) => {
-        console.log(option);
         const def = {
           type: 'button',
           model: new Model( {

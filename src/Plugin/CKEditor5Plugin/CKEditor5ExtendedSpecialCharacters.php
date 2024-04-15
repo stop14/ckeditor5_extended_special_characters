@@ -1,1 +1,96 @@
-<?php&#10declare(strict_types=1);&#10&#10namespace Drupal\extended_special_characters\Plugin\CKEditor5Plugin;&#10&#10use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;&#10use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;&#10use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;&#10use Drupal\Core\Form\FormStateInterface;&#10use Drupal\editor\EditorInterface;&#10&#10/**&#10 * CKEditor 5 Extended Special Characters plugin configuration.&#10 *&#10 */&#10class CKEditor5ExtendedSpecialCharacters extends CKEditor5PluginDefault implements CKEditor5PluginConfigurableInterface {&#10&#10  use CKEditor5PluginConfigurableTrait;&#10&#10  /**&#10   * The default config name for Extended Special Characters options.&#10   *&#10   * @var string&#10   */&#10  const CONFIG_NAME = 'extended_special_characters';&#10&#10  /**&#10   * The default array of Extended Special Characters options.&#10   *&#10   * @var string[][]&#10   */&#10  const DEFAULT_CONFIGURATION = [&#10    'options' => ['🚀','👽','🌟','😀','🤯','🤘']&#10  ];&#10&#10  /**&#10   * {@inheritdoc}&#10   */&#10  public function defaultConfiguration(): array {&#10    return static::DEFAULT_CONFIGURATION;&#10  }&#10&#10  /**&#10   * {@inheritdoc}&#10   */&#10  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {&#10    $form[static::CONFIG_NAME] = [&#10      '#type' => 'textarea',&#10      '#title' => $this->t('Extended Special Characters'),&#10      '#default_value' => implode(' ', $this->configuration[static::CONFIG_NAME]),&#10      '#description' => $this->t(&#10        'List special characters to be added to Extended Special Characters CKEditor Widget. Separate each characters with a space.'&#10      ),&#10    ];&#10&#10    return $form;&#10  }&#10&#10  /**&#10   * {@inheritdoc}&#10   */&#10  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {&#10    // Match the config schema structure at&#10    // ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters.&#10    $options_string = $form_state->getValue(static::CONFIG_NAME);&#10&#10    if ($options_string !== "") {&#10      $string_without_extra_spaces = preg_replace('/\s+/', ' ', $options_string);&#10      $options_array = explode(' ', trim($string_without_extra_spaces));&#10&#10      $form_state->setValue(static::CONFIG_NAME, array_unique($options_array));&#10    }&#10    else {&#10      $form_state->setValue(static::CONFIG_NAME, static::DEFAULT_CONFIGURATION[static::CONFIG_NAME]);&#10    }&#10  }&#10&#10  /**&#10   * {@inheritdoc}&#10   */&#10  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {&#10    $this->configuration[static::CONFIG_NAME] = $form_state->getValue(static::CONFIG_NAME);&#10  }&#10&#10  /**&#10   * {@inheritdoc}&#10   */&#10  public function getDynamicPluginConfig(array $static_plugin_config, EditorInterface $editor): array {&#10    return [&#10      'extendedSpecialCharacters' => [&#10        'options' => $this->configuration[static::CONFIG_NAME],&#10      ],&#10    ];&#10  }&#10&#10}&#10
+<?php
+declare(strict_types=1);
+
+namespace Drupal\extended_special_characters\Plugin\CKEditor5Plugin;
+
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableInterface;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginConfigurableTrait;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefault;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\editor\EditorInterface;
+
+/**
+ * CKEditor 5 Extended Special Characters plugin configuration.
+ *
+ */
+class CKEditor5ExtendedSpecialCharacters extends CKEditor5PluginDefault implements CKEditor5PluginConfigurableInterface {
+
+  use CKEditor5PluginConfigurableTrait;
+
+  /**
+   * The default config name for Extended Special Characters options.
+   *
+   * @var string
+   */
+  const CONFIG_NAME = 'options';
+
+  /**
+   * The default array of Extended Special Characters options.
+   *
+   * @var string[][]
+   */
+  const DEFAULT_CONFIGURATION = [
+    'options' => ['🚀','👽','🌟','😀','🤯','🤘']
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultConfiguration(): array {
+    return static::DEFAULT_CONFIGURATION;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state): array {
+    $form[static::CONFIG_NAME] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Extended Special Characters'),
+      '#default_value' => implode(' ', $this->configuration[static::CONFIG_NAME]),
+      '#description' => $this->t(
+        'List special characters to be added to Extended Special Characters CKEditor Widget. Separate each characters with a space.'
+      ),
+    ];
+
+    return $form;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
+    // Match the config schema structure at
+    // ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters.
+    $options_string = $form_state->getValue(static::CONFIG_NAME);
+
+    if ($options_string !== "") {
+      $string_without_extra_spaces = preg_replace('/\s+/', ' ', $options_string);
+      $options_array = explode(' ', trim($string_without_extra_spaces));
+
+      $form_state->setValue(static::CONFIG_NAME, array_unique($options_array));
+    }
+    else {
+      $form_state->setValue(static::CONFIG_NAME, static::DEFAULT_CONFIGURATION[static::CONFIG_NAME]);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state): void {
+    $this->configuration[static::CONFIG_NAME] = $form_state->getValue(static::CONFIG_NAME);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getDynamicPluginConfig(array $static_plugin_config, EditorInterface $editor): array {
+    return [
+      'extendedSpecialCharacters' => [
+        'options' => $this->configuration[static::CONFIG_NAME],
+      ],
+    ];
+  }
+
+}

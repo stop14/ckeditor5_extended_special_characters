@@ -1,0 +1,11 @@
+ckeditor5.plugin.extended_special_characters_extended_special_characters:
+  type: mapping
+  label: 'Available Special Characters'
+  mapping:
+    options:
+      type: sequence
+      orderby: value
+      label: 'Available Special Characters'
+      sequence:
+        type: string
+        label: 'Available Special Characters'

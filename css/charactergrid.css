@@ -12,7 +12,6 @@
     grid-gap: var(--ck-spacing-standard);
     grid-template-columns: repeat(10,1fr);
     margin: var(--ck-spacing-standard) var(--ck-spacing-large);
-    min-height:
 }
 
 .ck.ck-extended-special-characters .ck-list li {
