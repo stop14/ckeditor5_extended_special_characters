@@ -1,27 +1,22 @@
-## CKEditor 5 plugin development starter template
+## CKEditor 5 Extended Special Characters Drupal Module
 
-To facilitate easier development of modules that provide CKEditor 5 plugins,
-developers may copy the contents of this directory to the root of their module
-directory. This provides the basic build tools and directory structure for
-creating CKEditor 5 plugins within a contributed module, as well as a basic
-working plugin based on the [CKEditor 5 block plugin tutorial](https://ckeditor.com/docs/ckeditor5/latest/framework/guides/tutorials/implementing-a-block-widget.html)
-but with additional documentation and minor changes for better integration
-with Drupal.
+This module provides a configurable interface to supply a customized list of special characters to CKEditor 5. It also supplies a hook (see extended_special_characters.api.php) to allow module authors to supply their own default list of special characters.
 
-When Drupal updates to use newer versions of CKEditor 5, it may be necessary to
-update any files copied from here to your module.
+This module is indebted to the authors of the https://www.drupal.org/project/ckeditor_specialchars module for the idea and its CKEditor 4 implementation. It is also indebted to the authors of https://www.drupal.org/project/ckeditor5_dev for the starter template.
 
-Plugin source should be added to
-`js/ckeditor5_plugins/{pluginNameDirectory}/src` and the build tools expect this
-directory to include an `index.js` file that exports one or more CKEditor 5
-plugins. Note that requiring `index.js` to be inside
-`{pluginNameDirectory}/src` is not a fixed requirement of CKEditor 5 or Drupal,
-but a requirement of this starter template that can be changed in
-`webpack.config.js` as needed.
+A future iteration of this module may fold the configurable characters into CKEditor5’s existing special characters plugin but that was a bridge too far for this time around. It currently provides a separate CKEditor5 widget.
 
-In the module directory, run `yarn install` to set up the necessary assets. The
-initial run of `install` may take a few minutes, but subsequent builds will be
-faster.
+USAGE:
 
-After installing dependencies, plugins can be built with `yarn build` or `yarn
-watch`. They will be built to `js/build/{pluginNameDirectory}.js`.  co
+- Enable the module.
+- Under Admin > Configuration > Content Authoring > Text Format and Editors configure the format of your choice (e.g. Basic HTML).
+- Ensure the Text Editor is CKEditor 5.
+- Drag the “🚀” button from Available Buttons to the Active Toolbar
+- Under the CKEditor 5 plugin settings / Extended Special Character Set:
+  - Add your special characters, separated by a space. 
+- Save Configuration.
+
+### Note
+It is important that each option have only one character, and that all characters are separated by a space. The module will currently warn you if you have forgotten to separate two characters, but it will allow you to save your character set regardless.
+
+This module was sponsored by the Digital Publishing Cooperative at the University of Virginia.

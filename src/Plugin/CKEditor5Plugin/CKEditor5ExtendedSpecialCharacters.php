@@ -72,8 +72,8 @@ class CKEditor5ExtendedSpecialCharacters extends CKEditor5PluginDefault implemen
    * {@inheritdoc}
    */
   public function validateConfigurationForm(array &$form, FormStateInterface $form_state): void {
-    // Match the config schema structure at
-    // ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters.
+    // Matches the config schema structure at
+    // ckeditor5.plugin.ckeditor5_extended_special_characters_extended_special_characters
     $options_string = $form_state->getValue(static::CONFIG_NAME);
 
     if ($options_string !== "") {

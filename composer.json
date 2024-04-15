@@ -1,0 +1,9 @@
+{
+    "name": "stop14/ckeditor5_extended_special_characters",
+    "description": "A Drupal module that provides a configurable interface to supply a customized list of special characters to CKEditor 5 WYSIWYG.",
+    "type": "drupal-module",
+    "require": {
+        "php": ">=8.0"
+    },
+    "license": "MIT"
+}

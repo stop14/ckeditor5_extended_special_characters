@@ -16,7 +16,7 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
     const editor = this.editor;
 
 
-    editor.config.define('extendedSpecialCharacters', {options: ['🚀','👽','🌟','😀','🤯','🤘']});
+    editor.config.define('extendedSpecialCharacters', {options: []});
 
     // Register the extendedSpecialCharacters toolbar button.
     editor.ui.componentFactory.add('extendedSpecialCharacters', (locale) => {
@@ -32,6 +32,8 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
       });
 
       const items = new Collection();
+
+      // Add each option as a dropdown button
 
       options.forEach((option) => {
         const def = {
@@ -62,6 +64,8 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
       } );
 
       dropdownView.bind( 'isEnabled' ).to( inputCommand );
+
+      // Provide a listener that inserts the chosen character when requested.
 
       this.listenTo( dropdownView, 'execute', evt => {
         const { commandValue } = evt.source;
