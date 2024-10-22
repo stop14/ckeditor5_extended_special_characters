@@ -1,6 +1,6 @@
 {
   "name": "ckeditor5-extended-special-characters",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Drupal 10+ module that adds configurable special characters to CKEditor5",
   "author": "",
   "license": "GPL-2.0-or-later",
