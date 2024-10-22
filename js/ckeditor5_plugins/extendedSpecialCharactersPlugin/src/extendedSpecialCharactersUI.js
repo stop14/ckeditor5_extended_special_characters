@@ -6,7 +6,7 @@ import { Plugin } from 'ckeditor5/src/core';
 import {
   addListToDropdown,
   createDropdown,
-  Model,
+  ViewModel,
   SplitButtonView,
 } from 'ckeditor5/src/ui';
 import { Collection } from 'ckeditor5/src/utils';
@@ -38,7 +38,7 @@ export default class ExtendedSpecialCharactersUI extends Plugin {
       options.forEach((option) => {
         const def = {
           type: 'button',
-          model: new Model( {
+          model: new ViewModel( {
             label: option,
             withText: true
           })
